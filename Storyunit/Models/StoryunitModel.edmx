@@ -1,0 +1,486 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dbStoryunitModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Auteur">
+          <Key>
+            <PropertyRef Name="AuteurID" />
+          </Key>
+          <Property Name="AuteurID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AuteurVoornaam" Type="varchar(max)" />
+          <Property Name="AuteurAchternaam" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Boek">
+          <Key>
+            <PropertyRef Name="BoekID" />
+          </Key>
+          <Property Name="BoekID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AuteurID" Type="int" Nullable="false" />
+          <Property Name="UitgeverID" Type="int" Nullable="false" />
+          <Property Name="TaalID" Type="int" Nullable="false" />
+          <Property Name="Titel" Type="varchar(max)" />
+          <Property Name="Afmeting" Type="varchar" MaxLength="50" />
+          <Property Name="Gewicht" Type="varchar" MaxLength="50" />
+          <Property Name="Druk" Type="varchar" MaxLength="50" />
+          <Property Name="ISBN" Type="varchar" MaxLength="50" />
+          <Property Name="Fotolink" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Taal">
+          <Key>
+            <PropertyRef Name="TaalID" />
+          </Key>
+          <Property Name="TaalID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Taal" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Tijdschrift">
+          <Key>
+            <PropertyRef Name="TijdschriftID" />
+          </Key>
+          <Property Name="TijdschriftID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AuteurID" Type="int" Nullable="false" />
+          <Property Name="UitgeverID" Type="int" Nullable="false" />
+          <Property Name="TaalID" Type="int" Nullable="false" />
+          <Property Name="Titel" Type="varchar(max)" />
+          <Property Name="Uitgifte" Type="varchar" MaxLength="50" />
+          <Property Name="Afmeting" Type="varchar" MaxLength="50" />
+          <Property Name="ISSN" Type="varchar" MaxLength="50" />
+          <Property Name="Fotolink" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Uitgever">
+          <Key>
+            <PropertyRef Name="UitgeverID" />
+          </Key>
+          <Property Name="UitgeverID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UitgeverNaam" Type="varchar(max)" />
+        </EntityType>
+        <Association Name="FK_Boek_Auteur">
+          <End Role="Auteur" Type="Self.Auteur" Multiplicity="1" />
+          <End Role="Boek" Type="Self.Boek" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Auteur">
+              <PropertyRef Name="AuteurID" />
+            </Principal>
+            <Dependent Role="Boek">
+              <PropertyRef Name="AuteurID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Boek_Boek">
+          <End Role="Boek" Type="Self.Boek" Multiplicity="1" />
+          <End Role="Boek1" Type="Self.Boek" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Boek">
+              <PropertyRef Name="BoekID" />
+            </Principal>
+            <Dependent Role="Boek1">
+              <PropertyRef Name="BoekID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Boek_Taal">
+          <End Role="Taal" Type="Self.Taal" Multiplicity="1" />
+          <End Role="Boek" Type="Self.Boek" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Taal">
+              <PropertyRef Name="TaalID" />
+            </Principal>
+            <Dependent Role="Boek">
+              <PropertyRef Name="TaalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Boek_Uitgever">
+          <End Role="Uitgever" Type="Self.Uitgever" Multiplicity="1" />
+          <End Role="Boek" Type="Self.Boek" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uitgever">
+              <PropertyRef Name="UitgeverID" />
+            </Principal>
+            <Dependent Role="Boek">
+              <PropertyRef Name="UitgeverID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tijdschrift_Auteur">
+          <End Role="Auteur" Type="Self.Auteur" Multiplicity="1" />
+          <End Role="Tijdschrift" Type="Self.Tijdschrift" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Auteur">
+              <PropertyRef Name="AuteurID" />
+            </Principal>
+            <Dependent Role="Tijdschrift">
+              <PropertyRef Name="AuteurID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tijdschrift_Taal">
+          <End Role="Taal" Type="Self.Taal" Multiplicity="1" />
+          <End Role="Tijdschrift" Type="Self.Tijdschrift" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Taal">
+              <PropertyRef Name="TaalID" />
+            </Principal>
+            <Dependent Role="Tijdschrift">
+              <PropertyRef Name="TaalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tijdschrift_Tijdschrift">
+          <End Role="Tijdschrift" Type="Self.Tijdschrift" Multiplicity="1" />
+          <End Role="Tijdschrift1" Type="Self.Tijdschrift" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Tijdschrift">
+              <PropertyRef Name="TijdschriftID" />
+            </Principal>
+            <Dependent Role="Tijdschrift1">
+              <PropertyRef Name="TijdschriftID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tijdschrift_Uitgever">
+          <End Role="Uitgever" Type="Self.Uitgever" Multiplicity="1" />
+          <End Role="Tijdschrift" Type="Self.Tijdschrift" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uitgever">
+              <PropertyRef Name="UitgeverID" />
+            </Principal>
+            <Dependent Role="Tijdschrift">
+              <PropertyRef Name="UitgeverID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbStoryunitModelStoreContainer">
+          <EntitySet Name="Auteur" EntityType="Self.Auteur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Boek" EntityType="Self.Boek" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Taal" EntityType="Self.Taal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tijdschrift" EntityType="Self.Tijdschrift" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Uitgever" EntityType="Self.Uitgever" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Boek_Auteur" Association="Self.FK_Boek_Auteur">
+            <End Role="Auteur" EntitySet="Auteur" />
+            <End Role="Boek" EntitySet="Boek" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Boek_Boek" Association="Self.FK_Boek_Boek">
+            <End Role="Boek" EntitySet="Boek" />
+            <End Role="Boek1" EntitySet="Boek" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Boek_Taal" Association="Self.FK_Boek_Taal">
+            <End Role="Taal" EntitySet="Taal" />
+            <End Role="Boek" EntitySet="Boek" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Boek_Uitgever" Association="Self.FK_Boek_Uitgever">
+            <End Role="Uitgever" EntitySet="Uitgever" />
+            <End Role="Boek" EntitySet="Boek" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tijdschrift_Auteur" Association="Self.FK_Tijdschrift_Auteur">
+            <End Role="Auteur" EntitySet="Auteur" />
+            <End Role="Tijdschrift" EntitySet="Tijdschrift" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tijdschrift_Taal" Association="Self.FK_Tijdschrift_Taal">
+            <End Role="Taal" EntitySet="Taal" />
+            <End Role="Tijdschrift" EntitySet="Tijdschrift" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tijdschrift_Tijdschrift" Association="Self.FK_Tijdschrift_Tijdschrift">
+            <End Role="Tijdschrift" EntitySet="Tijdschrift" />
+            <End Role="Tijdschrift1" EntitySet="Tijdschrift" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tijdschrift_Uitgever" Association="Self.FK_Tijdschrift_Uitgever">
+            <End Role="Uitgever" EntitySet="Uitgever" />
+            <End Role="Tijdschrift" EntitySet="Tijdschrift" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbStoryunitModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Auteur">
+          <Key>
+            <PropertyRef Name="AuteurID" />
+          </Key>
+          <Property Name="AuteurID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AuteurVoornaam" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AuteurAchternaam" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Boek" Relationship="Self.FK_Boek_Auteur" FromRole="Auteur" ToRole="Boek" />
+          <NavigationProperty Name="Tijdschrift" Relationship="Self.FK_Tijdschrift_Auteur" FromRole="Auteur" ToRole="Tijdschrift" />
+        </EntityType>
+        <EntityType Name="Boek">
+          <Key>
+            <PropertyRef Name="BoekID" />
+          </Key>
+          <Property Name="BoekID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AuteurID" Type="Int32" Nullable="false" />
+          <Property Name="UitgeverID" Type="Int32" Nullable="false" />
+          <Property Name="TaalID" Type="Int32" Nullable="false" />
+          <Property Name="Titel" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Afmeting" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Gewicht" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Druk" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ISBN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fotolink" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Auteur" Relationship="Self.FK_Boek_Auteur" FromRole="Boek" ToRole="Auteur" />
+          <NavigationProperty Name="Boek1" Relationship="Self.FK_Boek_Boek" FromRole="Boek" ToRole="Boek1" />
+          <NavigationProperty Name="Boek2" Relationship="Self.FK_Boek_Boek" FromRole="Boek1" ToRole="Boek" />
+          <NavigationProperty Name="Taal" Relationship="Self.FK_Boek_Taal" FromRole="Boek" ToRole="Taal" />
+          <NavigationProperty Name="Uitgever" Relationship="Self.FK_Boek_Uitgever" FromRole="Boek" ToRole="Uitgever" />
+        </EntityType>
+        <EntityType Name="Taal">
+          <Key>
+            <PropertyRef Name="TaalID" />
+          </Key>
+          <Property Name="TaalID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Taal1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Boek" Relationship="Self.FK_Boek_Taal" FromRole="Taal" ToRole="Boek" />
+          <NavigationProperty Name="Tijdschrift" Relationship="Self.FK_Tijdschrift_Taal" FromRole="Taal" ToRole="Tijdschrift" />
+        </EntityType>
+        <EntityType Name="Tijdschrift">
+          <Key>
+            <PropertyRef Name="TijdschriftID" />
+          </Key>
+          <Property Name="TijdschriftID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AuteurID" Type="Int32" Nullable="false" />
+          <Property Name="UitgeverID" Type="Int32" Nullable="false" />
+          <Property Name="TaalID" Type="Int32" Nullable="false" />
+          <Property Name="Titel" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Uitgifte" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Afmeting" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ISSN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fotolink" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Auteur" Relationship="Self.FK_Tijdschrift_Auteur" FromRole="Tijdschrift" ToRole="Auteur" />
+          <NavigationProperty Name="Taal" Relationship="Self.FK_Tijdschrift_Taal" FromRole="Tijdschrift" ToRole="Taal" />
+          <NavigationProperty Name="Tijdschrift1" Relationship="Self.FK_Tijdschrift_Tijdschrift" FromRole="Tijdschrift" ToRole="Tijdschrift1" />
+          <NavigationProperty Name="Tijdschrift2" Relationship="Self.FK_Tijdschrift_Tijdschrift" FromRole="Tijdschrift1" ToRole="Tijdschrift" />
+          <NavigationProperty Name="Uitgever" Relationship="Self.FK_Tijdschrift_Uitgever" FromRole="Tijdschrift" ToRole="Uitgever" />
+        </EntityType>
+        <EntityType Name="Uitgever">
+          <Key>
+            <PropertyRef Name="UitgeverID" />
+          </Key>
+          <Property Name="UitgeverID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UitgeverNaam" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Boek" Relationship="Self.FK_Boek_Uitgever" FromRole="Uitgever" ToRole="Boek" />
+          <NavigationProperty Name="Tijdschrift" Relationship="Self.FK_Tijdschrift_Uitgever" FromRole="Uitgever" ToRole="Tijdschrift" />
+        </EntityType>
+        <Association Name="FK_Boek_Auteur">
+          <End Role="Auteur" Type="Self.Auteur" Multiplicity="1" />
+          <End Role="Boek" Type="Self.Boek" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Auteur">
+              <PropertyRef Name="AuteurID" />
+            </Principal>
+            <Dependent Role="Boek">
+              <PropertyRef Name="AuteurID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tijdschrift_Auteur">
+          <End Role="Auteur" Type="Self.Auteur" Multiplicity="1" />
+          <End Role="Tijdschrift" Type="Self.Tijdschrift" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Auteur">
+              <PropertyRef Name="AuteurID" />
+            </Principal>
+            <Dependent Role="Tijdschrift">
+              <PropertyRef Name="AuteurID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Boek_Boek">
+          <End Role="Boek" Type="Self.Boek" Multiplicity="1" />
+          <End Role="Boek1" Type="Self.Boek" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Boek">
+              <PropertyRef Name="BoekID" />
+            </Principal>
+            <Dependent Role="Boek1">
+              <PropertyRef Name="BoekID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Boek_Taal">
+          <End Role="Taal" Type="Self.Taal" Multiplicity="1" />
+          <End Role="Boek" Type="Self.Boek" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Taal">
+              <PropertyRef Name="TaalID" />
+            </Principal>
+            <Dependent Role="Boek">
+              <PropertyRef Name="TaalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Boek_Uitgever">
+          <End Role="Uitgever" Type="Self.Uitgever" Multiplicity="1" />
+          <End Role="Boek" Type="Self.Boek" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uitgever">
+              <PropertyRef Name="UitgeverID" />
+            </Principal>
+            <Dependent Role="Boek">
+              <PropertyRef Name="UitgeverID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tijdschrift_Taal">
+          <End Role="Taal" Type="Self.Taal" Multiplicity="1" />
+          <End Role="Tijdschrift" Type="Self.Tijdschrift" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Taal">
+              <PropertyRef Name="TaalID" />
+            </Principal>
+            <Dependent Role="Tijdschrift">
+              <PropertyRef Name="TaalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tijdschrift_Tijdschrift">
+          <End Role="Tijdschrift" Type="Self.Tijdschrift" Multiplicity="1" />
+          <End Role="Tijdschrift1" Type="Self.Tijdschrift" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Tijdschrift">
+              <PropertyRef Name="TijdschriftID" />
+            </Principal>
+            <Dependent Role="Tijdschrift1">
+              <PropertyRef Name="TijdschriftID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tijdschrift_Uitgever">
+          <End Role="Uitgever" Type="Self.Uitgever" Multiplicity="1" />
+          <End Role="Tijdschrift" Type="Self.Tijdschrift" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uitgever">
+              <PropertyRef Name="UitgeverID" />
+            </Principal>
+            <Dependent Role="Tijdschrift">
+              <PropertyRef Name="UitgeverID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbStoryunitEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Auteur" EntityType="Self.Auteur" />
+          <EntitySet Name="Boek" EntityType="Self.Boek" />
+          <EntitySet Name="Taal" EntityType="Self.Taal" />
+          <EntitySet Name="Tijdschrift" EntityType="Self.Tijdschrift" />
+          <EntitySet Name="Uitgever" EntityType="Self.Uitgever" />
+          <AssociationSet Name="FK_Boek_Auteur" Association="Self.FK_Boek_Auteur">
+            <End Role="Auteur" EntitySet="Auteur" />
+            <End Role="Boek" EntitySet="Boek" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tijdschrift_Auteur" Association="Self.FK_Tijdschrift_Auteur">
+            <End Role="Auteur" EntitySet="Auteur" />
+            <End Role="Tijdschrift" EntitySet="Tijdschrift" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Boek_Boek" Association="Self.FK_Boek_Boek">
+            <End Role="Boek" EntitySet="Boek" />
+            <End Role="Boek1" EntitySet="Boek" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Boek_Taal" Association="Self.FK_Boek_Taal">
+            <End Role="Taal" EntitySet="Taal" />
+            <End Role="Boek" EntitySet="Boek" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Boek_Uitgever" Association="Self.FK_Boek_Uitgever">
+            <End Role="Uitgever" EntitySet="Uitgever" />
+            <End Role="Boek" EntitySet="Boek" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tijdschrift_Taal" Association="Self.FK_Tijdschrift_Taal">
+            <End Role="Taal" EntitySet="Taal" />
+            <End Role="Tijdschrift" EntitySet="Tijdschrift" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tijdschrift_Tijdschrift" Association="Self.FK_Tijdschrift_Tijdschrift">
+            <End Role="Tijdschrift" EntitySet="Tijdschrift" />
+            <End Role="Tijdschrift1" EntitySet="Tijdschrift" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tijdschrift_Uitgever" Association="Self.FK_Tijdschrift_Uitgever">
+            <End Role="Uitgever" EntitySet="Uitgever" />
+            <End Role="Tijdschrift" EntitySet="Tijdschrift" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbStoryunitModelStoreContainer" CdmEntityContainer="dbStoryunitEntities">
+          <EntitySetMapping Name="Auteur">
+            <EntityTypeMapping TypeName="dbStoryunitModel.Auteur">
+              <MappingFragment StoreEntitySet="Auteur">
+                <ScalarProperty Name="AuteurID" ColumnName="AuteurID" />
+                <ScalarProperty Name="AuteurVoornaam" ColumnName="AuteurVoornaam" />
+                <ScalarProperty Name="AuteurAchternaam" ColumnName="AuteurAchternaam" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Boek">
+            <EntityTypeMapping TypeName="dbStoryunitModel.Boek">
+              <MappingFragment StoreEntitySet="Boek">
+                <ScalarProperty Name="BoekID" ColumnName="BoekID" />
+                <ScalarProperty Name="AuteurID" ColumnName="AuteurID" />
+                <ScalarProperty Name="UitgeverID" ColumnName="UitgeverID" />
+                <ScalarProperty Name="TaalID" ColumnName="TaalID" />
+                <ScalarProperty Name="Titel" ColumnName="Titel" />
+                <ScalarProperty Name="Afmeting" ColumnName="Afmeting" />
+                <ScalarProperty Name="Gewicht" ColumnName="Gewicht" />
+                <ScalarProperty Name="Druk" ColumnName="Druk" />
+                <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+                <ScalarProperty Name="Fotolink" ColumnName="Fotolink" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Taal">
+            <EntityTypeMapping TypeName="dbStoryunitModel.Taal">
+              <MappingFragment StoreEntitySet="Taal">
+                <ScalarProperty Name="TaalID" ColumnName="TaalID" />
+                <ScalarProperty Name="Taal1" ColumnName="Taal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tijdschrift">
+            <EntityTypeMapping TypeName="dbStoryunitModel.Tijdschrift">
+              <MappingFragment StoreEntitySet="Tijdschrift">
+                <ScalarProperty Name="TijdschriftID" ColumnName="TijdschriftID" />
+                <ScalarProperty Name="AuteurID" ColumnName="AuteurID" />
+                <ScalarProperty Name="UitgeverID" ColumnName="UitgeverID" />
+                <ScalarProperty Name="TaalID" ColumnName="TaalID" />
+                <ScalarProperty Name="Titel" ColumnName="Titel" />
+                <ScalarProperty Name="Uitgifte" ColumnName="Uitgifte" />
+                <ScalarProperty Name="Afmeting" ColumnName="Afmeting" />
+                <ScalarProperty Name="ISSN" ColumnName="ISSN" />
+                <ScalarProperty Name="Fotolink" ColumnName="Fotolink" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Uitgever">
+            <EntityTypeMapping TypeName="dbStoryunitModel.Uitgever">
+              <MappingFragment StoreEntitySet="Uitgever">
+                <ScalarProperty Name="UitgeverID" ColumnName="UitgeverID" />
+                <ScalarProperty Name="UitgeverNaam" ColumnName="UitgeverNaam" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
