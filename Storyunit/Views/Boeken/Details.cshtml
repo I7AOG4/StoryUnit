@@ -1,0 +1,106 @@
+﻿@model Storyunit.Models.Boek
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Boek</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Titel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Titel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Afmeting)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Afmeting)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gewicht)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gewicht)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Druk)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Druk)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ISBN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ISBN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fotolink)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fotolink)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Auteur.AuteurVoornaam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Auteur.AuteurVoornaam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Boek1.Titel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Boek1.Titel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Boek2.Titel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Boek2.Titel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Taal.Taal1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Taal.Taal1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Uitgever.UitgeverNaam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Uitgever.UitgeverNaam)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BoekID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
