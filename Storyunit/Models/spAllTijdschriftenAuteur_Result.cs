@@ -10,22 +10,16 @@
 namespace Storyunit.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Tijdschrift
+    public partial class spAllTijdschriftenAuteur_Result
     {
-        public int TijdschriftID { get; set; }
-        public int AuteurID { get; set; }
-        public int UitgeverID { get; set; }
-        public int TaalID { get; set; }
+        public string AuteurVoornaam { get; set; }
+        public string AuteurAchternaam { get; set; }
+        public string UitgeverNaam { get; set; }
+        public string Taal { get; set; }
         public string Titel { get; set; }
         public string Uitgifte { get; set; }
         public string Afmeting { get; set; }
         public string ISSN { get; set; }
-        public string Fotolink { get; set; }
-    
-        public virtual Auteur Auteur { get; set; }
-        public virtual Taal Taal { get; set; }
-        public virtual Uitgever Uitgever { get; set; }
     }
 }

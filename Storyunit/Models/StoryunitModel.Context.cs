@@ -12,6 +12,8 @@ namespace Storyunit.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class dbStoryunitEntities : DbContext
     {
@@ -30,5 +32,51 @@ namespace Storyunit.Models
         public virtual DbSet<Taal> Taal { get; set; }
         public virtual DbSet<Tijdschrift> Tijdschrift { get; set; }
         public virtual DbSet<Uitgever> Uitgever { get; set; }
+    
+        public virtual ObjectResult<spAllboeken_Result> spAllboeken()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spAllboeken_Result>("spAllboeken");
+        }
+    
+        public virtual ObjectResult<spAllboekenAuteur_Result> spAllboekenAuteur(string auteur)
+        {
+            var auteurParameter = auteur != null ?
+                new ObjectParameter("auteur", auteur) :
+                new ObjectParameter("auteur", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spAllboekenAuteur_Result>("spAllboekenAuteur", auteurParameter);
+        }
+    
+        public virtual ObjectResult<spAllboekenTaal_Result> spAllboekenTaal(string taal)
+        {
+            var taalParameter = taal != null ?
+                new ObjectParameter("Taal", taal) :
+                new ObjectParameter("Taal", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spAllboekenTaal_Result>("spAllboekenTaal", taalParameter);
+        }
+    
+        public virtual ObjectResult<spAllTijdschriften_Result> spAllTijdschriften()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spAllTijdschriften_Result>("spAllTijdschriften");
+        }
+    
+        public virtual ObjectResult<spAllTijdschriftenAuteur_Result> spAllTijdschriftenAuteur(string auteur)
+        {
+            var auteurParameter = auteur != null ?
+                new ObjectParameter("auteur", auteur) :
+                new ObjectParameter("auteur", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spAllTijdschriftenAuteur_Result>("spAllTijdschriftenAuteur", auteurParameter);
+        }
+    
+        public virtual ObjectResult<spAllTijdschriftenTaal_Result> spAllTijdschriftenTaal(string taal)
+        {
+            var taalParameter = taal != null ?
+                new ObjectParameter("Taal", taal) :
+                new ObjectParameter("Taal", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spAllTijdschriftenTaal_Result>("spAllTijdschriftenTaal", taalParameter);
+        }
     }
 }

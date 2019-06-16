@@ -152,6 +152,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="spAllboeken" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spAllboekenAuteur" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="auteur" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="spAllboekenTaal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Taal" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="spAllTijdschriften" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spAllTijdschriftenAuteur" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="auteur" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="spAllTijdschriftenTaal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Taal" Type="varchar(max)" Mode="In" />
+        </Function>
         <EntityContainer Name="dbStoryunitModelStoreContainer">
           <EntitySet Name="Auteur" EntityType="Self.Auteur" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Boek" EntityType="Self.Boek" Schema="dbo" store:Type="Tables" />
@@ -221,8 +235,6 @@
           <Property Name="ISBN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Fotolink" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Auteur" Relationship="Self.FK_Boek_Auteur" FromRole="Boek" ToRole="Auteur" />
-          <NavigationProperty Name="Boek1" Relationship="Self.FK_Boek_Boek" FromRole="Boek" ToRole="Boek1" />
-          <NavigationProperty Name="Boek2" Relationship="Self.FK_Boek_Boek" FromRole="Boek1" ToRole="Boek" />
           <NavigationProperty Name="Taal" Relationship="Self.FK_Boek_Taal" FromRole="Boek" ToRole="Taal" />
           <NavigationProperty Name="Uitgever" Relationship="Self.FK_Boek_Uitgever" FromRole="Boek" ToRole="Uitgever" />
         </EntityType>
@@ -250,8 +262,6 @@
           <Property Name="Fotolink" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Auteur" Relationship="Self.FK_Tijdschrift_Auteur" FromRole="Tijdschrift" ToRole="Auteur" />
           <NavigationProperty Name="Taal" Relationship="Self.FK_Tijdschrift_Taal" FromRole="Tijdschrift" ToRole="Taal" />
-          <NavigationProperty Name="Tijdschrift1" Relationship="Self.FK_Tijdschrift_Tijdschrift" FromRole="Tijdschrift" ToRole="Tijdschrift1" />
-          <NavigationProperty Name="Tijdschrift2" Relationship="Self.FK_Tijdschrift_Tijdschrift" FromRole="Tijdschrift1" ToRole="Tijdschrift" />
           <NavigationProperty Name="Uitgever" Relationship="Self.FK_Tijdschrift_Uitgever" FromRole="Tijdschrift" ToRole="Uitgever" />
         </EntityType>
         <EntityType Name="Uitgever">
@@ -284,18 +294,6 @@
             </Principal>
             <Dependent Role="Tijdschrift">
               <PropertyRef Name="AuteurID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Boek_Boek">
-          <End Role="Boek" Type="Self.Boek" Multiplicity="1" />
-          <End Role="Boek1" Type="Self.Boek" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Boek">
-              <PropertyRef Name="BoekID" />
-            </Principal>
-            <Dependent Role="Boek1">
-              <PropertyRef Name="BoekID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -335,18 +333,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Tijdschrift_Tijdschrift">
-          <End Role="Tijdschrift" Type="Self.Tijdschrift" Multiplicity="1" />
-          <End Role="Tijdschrift1" Type="Self.Tijdschrift" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Tijdschrift">
-              <PropertyRef Name="TijdschriftID" />
-            </Principal>
-            <Dependent Role="Tijdschrift1">
-              <PropertyRef Name="TijdschriftID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Tijdschrift_Uitgever">
           <End Role="Uitgever" Type="Self.Uitgever" Multiplicity="1" />
           <End Role="Tijdschrift" Type="Self.Tijdschrift" Multiplicity="*" />
@@ -373,10 +359,6 @@
             <End Role="Auteur" EntitySet="Auteur" />
             <End Role="Tijdschrift" EntitySet="Tijdschrift" />
           </AssociationSet>
-          <AssociationSet Name="FK_Boek_Boek" Association="Self.FK_Boek_Boek">
-            <End Role="Boek" EntitySet="Boek" />
-            <End Role="Boek1" EntitySet="Boek" />
-          </AssociationSet>
           <AssociationSet Name="FK_Boek_Taal" Association="Self.FK_Boek_Taal">
             <End Role="Taal" EntitySet="Taal" />
             <End Role="Boek" EntitySet="Boek" />
@@ -389,15 +371,88 @@
             <End Role="Taal" EntitySet="Taal" />
             <End Role="Tijdschrift" EntitySet="Tijdschrift" />
           </AssociationSet>
-          <AssociationSet Name="FK_Tijdschrift_Tijdschrift" Association="Self.FK_Tijdschrift_Tijdschrift">
-            <End Role="Tijdschrift" EntitySet="Tijdschrift" />
-            <End Role="Tijdschrift1" EntitySet="Tijdschrift" />
-          </AssociationSet>
           <AssociationSet Name="FK_Tijdschrift_Uitgever" Association="Self.FK_Tijdschrift_Uitgever">
             <End Role="Uitgever" EntitySet="Uitgever" />
             <End Role="Tijdschrift" EntitySet="Tijdschrift" />
           </AssociationSet>
+          <FunctionImport Name="spAllboeken" ReturnType="Collection(dbStoryunitModel.spAllboeken_Result)" />
+          <FunctionImport Name="spAllboekenAuteur" ReturnType="Collection(dbStoryunitModel.spAllboekenAuteur_Result)">
+            <Parameter Name="auteur" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spAllboekenTaal" ReturnType="Collection(dbStoryunitModel.spAllboekenTaal_Result)">
+            <Parameter Name="Taal" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spAllTijdschriften" ReturnType="Collection(dbStoryunitModel.spAllTijdschriften_Result)" />
+          <FunctionImport Name="spAllTijdschriftenAuteur" ReturnType="Collection(dbStoryunitModel.spAllTijdschriftenAuteur_Result)">
+            <Parameter Name="auteur" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spAllTijdschriftenTaal" ReturnType="Collection(dbStoryunitModel.spAllTijdschriftenTaal_Result)">
+            <Parameter Name="Taal" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="spAllboeken_Result">
+          <Property Type="String" Name="AuteurVoornaam" Nullable="true" />
+          <Property Type="String" Name="AuteurAchternaam" Nullable="true" />
+          <Property Type="String" Name="UitgeverNaam" Nullable="true" />
+          <Property Type="String" Name="Taal" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Titel" Nullable="true" />
+          <Property Type="String" Name="Afmeting" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Gewicht" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Druk" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ISBN" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="spAllboekenAuteur_Result">
+          <Property Type="String" Name="AuteurVoornaam" Nullable="true" />
+          <Property Type="String" Name="AuteurAchternaam" Nullable="true" />
+          <Property Type="String" Name="UitgeverNaam" Nullable="true" />
+          <Property Type="String" Name="Taal" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Titel" Nullable="true" />
+          <Property Type="String" Name="Afmeting" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Gewicht" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Druk" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ISBN" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="spAllboekenTaal_Result">
+          <Property Type="String" Name="AuteurVoornaam" Nullable="true" />
+          <Property Type="String" Name="AuteurAchternaam" Nullable="true" />
+          <Property Type="String" Name="UitgeverNaam" Nullable="true" />
+          <Property Type="String" Name="Taal" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Titel" Nullable="true" />
+          <Property Type="String" Name="Afmeting" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Gewicht" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Druk" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ISBN" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="spAllTijdschriften_Result">
+          <Property Type="String" Name="AuteurVoornaam" Nullable="true" />
+          <Property Type="String" Name="AuteurAchternaam" Nullable="true" />
+          <Property Type="String" Name="UitgeverNaam" Nullable="true" />
+          <Property Type="String" Name="Taal" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Titel" Nullable="true" />
+          <Property Type="String" Name="Uitgifte" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Afmeting" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ISSN" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="spAllTijdschriftenAuteur_Result">
+          <Property Type="String" Name="AuteurVoornaam" Nullable="true" />
+          <Property Type="String" Name="AuteurAchternaam" Nullable="true" />
+          <Property Type="String" Name="UitgeverNaam" Nullable="true" />
+          <Property Type="String" Name="Taal" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Titel" Nullable="true" />
+          <Property Type="String" Name="Uitgifte" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Afmeting" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ISSN" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="spAllTijdschriftenTaal_Result">
+          <Property Type="String" Name="AuteurVoornaam" Nullable="true" />
+          <Property Type="String" Name="AuteurAchternaam" Nullable="true" />
+          <Property Type="String" Name="UitgeverNaam" Nullable="true" />
+          <Property Type="String" Name="Taal" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Titel" Nullable="true" />
+          <Property Type="String" Name="Uitgifte" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Afmeting" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ISSN" Nullable="true" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -460,6 +515,93 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spAllboeken" FunctionName="dbStoryunitModel.Store.spAllboeken">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="dbStoryunitModel.spAllboeken_Result">
+                <ScalarProperty Name="AuteurVoornaam" ColumnName="AuteurVoornaam" />
+                <ScalarProperty Name="AuteurAchternaam" ColumnName="AuteurAchternaam" />
+                <ScalarProperty Name="UitgeverNaam" ColumnName="UitgeverNaam" />
+                <ScalarProperty Name="Taal" ColumnName="Taal" />
+                <ScalarProperty Name="Titel" ColumnName="Titel" />
+                <ScalarProperty Name="Afmeting" ColumnName="Afmeting" />
+                <ScalarProperty Name="Gewicht" ColumnName="Gewicht" />
+                <ScalarProperty Name="Druk" ColumnName="Druk" />
+                <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spAllboekenAuteur" FunctionName="dbStoryunitModel.Store.spAllboekenAuteur">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="dbStoryunitModel.spAllboekenAuteur_Result">
+                <ScalarProperty Name="AuteurVoornaam" ColumnName="AuteurVoornaam" />
+                <ScalarProperty Name="AuteurAchternaam" ColumnName="AuteurAchternaam" />
+                <ScalarProperty Name="UitgeverNaam" ColumnName="UitgeverNaam" />
+                <ScalarProperty Name="Taal" ColumnName="Taal" />
+                <ScalarProperty Name="Titel" ColumnName="Titel" />
+                <ScalarProperty Name="Afmeting" ColumnName="Afmeting" />
+                <ScalarProperty Name="Gewicht" ColumnName="Gewicht" />
+                <ScalarProperty Name="Druk" ColumnName="Druk" />
+                <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spAllboekenTaal" FunctionName="dbStoryunitModel.Store.spAllboekenTaal">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="dbStoryunitModel.spAllboekenTaal_Result">
+                <ScalarProperty Name="AuteurVoornaam" ColumnName="AuteurVoornaam" />
+                <ScalarProperty Name="AuteurAchternaam" ColumnName="AuteurAchternaam" />
+                <ScalarProperty Name="UitgeverNaam" ColumnName="UitgeverNaam" />
+                <ScalarProperty Name="Taal" ColumnName="Taal" />
+                <ScalarProperty Name="Titel" ColumnName="Titel" />
+                <ScalarProperty Name="Afmeting" ColumnName="Afmeting" />
+                <ScalarProperty Name="Gewicht" ColumnName="Gewicht" />
+                <ScalarProperty Name="Druk" ColumnName="Druk" />
+                <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spAllTijdschriften" FunctionName="dbStoryunitModel.Store.spAllTijdschriften">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="dbStoryunitModel.spAllTijdschriften_Result">
+                <ScalarProperty Name="AuteurVoornaam" ColumnName="AuteurVoornaam" />
+                <ScalarProperty Name="AuteurAchternaam" ColumnName="AuteurAchternaam" />
+                <ScalarProperty Name="UitgeverNaam" ColumnName="UitgeverNaam" />
+                <ScalarProperty Name="Taal" ColumnName="Taal" />
+                <ScalarProperty Name="Titel" ColumnName="Titel" />
+                <ScalarProperty Name="Uitgifte" ColumnName="Uitgifte" />
+                <ScalarProperty Name="Afmeting" ColumnName="Afmeting" />
+                <ScalarProperty Name="ISSN" ColumnName="ISSN" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spAllTijdschriftenAuteur" FunctionName="dbStoryunitModel.Store.spAllTijdschriftenAuteur">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="dbStoryunitModel.spAllTijdschriftenAuteur_Result">
+                <ScalarProperty Name="AuteurVoornaam" ColumnName="AuteurVoornaam" />
+                <ScalarProperty Name="AuteurAchternaam" ColumnName="AuteurAchternaam" />
+                <ScalarProperty Name="UitgeverNaam" ColumnName="UitgeverNaam" />
+                <ScalarProperty Name="Taal" ColumnName="Taal" />
+                <ScalarProperty Name="Titel" ColumnName="Titel" />
+                <ScalarProperty Name="Uitgifte" ColumnName="Uitgifte" />
+                <ScalarProperty Name="Afmeting" ColumnName="Afmeting" />
+                <ScalarProperty Name="ISSN" ColumnName="ISSN" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spAllTijdschriftenTaal" FunctionName="dbStoryunitModel.Store.spAllTijdschriftenTaal">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="dbStoryunitModel.spAllTijdschriftenTaal_Result">
+                <ScalarProperty Name="AuteurVoornaam" ColumnName="AuteurVoornaam" />
+                <ScalarProperty Name="AuteurAchternaam" ColumnName="AuteurAchternaam" />
+                <ScalarProperty Name="UitgeverNaam" ColumnName="UitgeverNaam" />
+                <ScalarProperty Name="Taal" ColumnName="Taal" />
+                <ScalarProperty Name="Titel" ColumnName="Titel" />
+                <ScalarProperty Name="Uitgifte" ColumnName="Uitgifte" />
+                <ScalarProperty Name="Afmeting" ColumnName="Afmeting" />
+                <ScalarProperty Name="ISSN" ColumnName="ISSN" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
