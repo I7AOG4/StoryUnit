@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Storyunit.Models.Tijdschrift>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Titel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Uitgifte)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Afmeting)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ISSN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fotolink)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Auteur.AuteurVoornaam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Taal.Taal1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Uitgever.UitgeverNaam)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Titel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Uitgifte)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Afmeting)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ISSN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fotolink)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Auteur.AuteurVoornaam)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Taal.Taal1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Uitgever.UitgeverNaam)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TijdschriftID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TijdschriftID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TijdschriftID })
+        </td>
+    </tr>
+}
+
+</table>

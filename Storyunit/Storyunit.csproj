@@ -178,8 +178,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AuteursController.cs" />
+    <Compile Include="Controllers\BoekenController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\TalenController.cs" />
+    <Compile Include="Controllers\TijdschriftenController.cs" />
+    <Compile Include="Controllers\UitgeversController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -351,6 +356,31 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Boeken\Create.cshtml" />
+    <Content Include="Views\Boeken\Delete.cshtml" />
+    <Content Include="Views\Boeken\Details.cshtml" />
+    <Content Include="Views\Boeken\Edit.cshtml" />
+    <Content Include="Views\Boeken\Index.cshtml" />
+    <Content Include="Views\Auteurs\Create.cshtml" />
+    <Content Include="Views\Auteurs\Delete.cshtml" />
+    <Content Include="Views\Auteurs\Details.cshtml" />
+    <Content Include="Views\Auteurs\Edit.cshtml" />
+    <Content Include="Views\Auteurs\Index.cshtml" />
+    <Content Include="Views\Talen\Create.cshtml" />
+    <Content Include="Views\Talen\Delete.cshtml" />
+    <Content Include="Views\Talen\Details.cshtml" />
+    <Content Include="Views\Talen\Edit.cshtml" />
+    <Content Include="Views\Talen\Index.cshtml" />
+    <Content Include="Views\Tijdschriften\Create.cshtml" />
+    <Content Include="Views\Tijdschriften\Delete.cshtml" />
+    <Content Include="Views\Tijdschriften\Details.cshtml" />
+    <Content Include="Views\Tijdschriften\Edit.cshtml" />
+    <Content Include="Views\Tijdschriften\Index.cshtml" />
+    <Content Include="Views\Uitgevers\Create.cshtml" />
+    <Content Include="Views\Uitgevers\Delete.cshtml" />
+    <Content Include="Views\Uitgevers\Details.cshtml" />
+    <Content Include="Views\Uitgevers\Edit.cshtml" />
+    <Content Include="Views\Uitgevers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
