@@ -1,0 +1,38 @@
+﻿.navbarStoryUnit {
+	margin-top: 10px;
+	height: 60px;
+	width: 100%;
+	position: fixed;
+	z-index: 3;
+	transition: all 0.5s ease;
+}
+.navHolder {
+	height: 100%;
+	width: 80%;
+	margin-left: 10%;
+	margin-right: 10%;
+}
+.navImg {
+	height: 100px;
+	position: relative;
+	top: -12px;
+	transition: all 0.5s ease;
+}
+.navItem {
+	height: 100%;
+	width: 4.5rem;
+	line-height: 40px;
+	text-align: center;
+	display: block;
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+	margin-left: 0.5rem;
+	margin-right: 0.5rem;
+	color: black;
+	border-bottom: 0px solid;
+	-webkit-transition: border-bottom .15s ease-in-out;
+	transition: border-bottom .15s ease-in-out;
+}
+.navItem:hover {
+	border-bottom: 4px solid var(--RTRcolor);
+}
