@@ -180,6 +180,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuteurController.cs" />
     <Compile Include="Controllers\AuteursController.cs" />
+    <Compile Include="Controllers\BoekController.cs" />
     <Compile Include="Controllers\BoekenController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -315,6 +316,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Content\HomepageBG.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -385,6 +387,7 @@
     <Content Include="Views\Uitgevers\Edit.cshtml" />
     <Content Include="Views\Uitgevers\Index.cshtml" />
     <Content Include="Views\Auteur\Index.cshtml" />
+    <Content Include="Views\Boek\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

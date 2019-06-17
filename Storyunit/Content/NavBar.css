@@ -1,6 +1,14 @@
 ﻿.navbarStoryUnit {
-	margin-top: 10px;
-	height: 60px;
+	margin-top: 30px;
+	height: 50px;
+	width: 100%;
+	position: fixed;
+	z-index: 3;
+	transition: all 0.5s ease;
+}
+.navbarStoryUnit.Scrolled {
+	margin-top: 0;
+	height: 50px;
 	width: 100%;
 	position: fixed;
 	z-index: 3;
@@ -8,31 +16,39 @@
 }
 .navHolder {
 	height: 100%;
-	width: 80%;
-	margin-left: 10%;
-	margin-right: 10%;
+	width: 70%;
+	margin-left: 15%;
+	margin-right: 15%;
 }
 .navImg {
 	height: 100px;
 	position: relative;
-	top: -12px;
+	top: -23px;
+	transition: all 0.5s ease;
+}
+.navImg.Scrolled {
+	height: 50px;
+	position: relative;
+	top: 0;
 	transition: all 0.5s ease;
 }
 .navItem {
-	height: 100%;
-	width: 4.5rem;
-	line-height: 40px;
+	height: 50px;
+	line-height: 50px;
 	text-align: center;
 	display: block;
-	padding-top: 0.5rem;
-	padding-bottom: 0.5rem;
 	margin-left: 0.5rem;
 	margin-right: 0.5rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
 	color: black;
+	border-top: 0px solid;
 	border-bottom: 0px solid;
-	-webkit-transition: border-bottom .15s ease-in-out;
-	transition: border-bottom .15s ease-in-out;
+	text-decoration: none;
 }
 .navItem:hover {
-	border-bottom: 4px solid var(--RTRcolor);
+	text-decoration: none;
+	color: black;
+	border-top: 2px solid rgb(24,131,238);
+	border-bottom: 2px solid rgb(24,131,238);
 }

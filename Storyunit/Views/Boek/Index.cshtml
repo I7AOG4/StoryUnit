@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Storyunit.Models.spAllboeken_Result>
+
+    @{
+    ViewBag.Title = "Boek";
+    }
+<div class="card-columns d-flex flex-wrap">
+    @foreach (var item in Model) {
+    <div class="card" style="width: 18rem; margin: 10px">
+        <div class="card-body">
+            <h5 class="card-title">@Html.DisplayFor(modelItem => item.Titel)</h5>
+        </div>
+        <img class="card-img-top" src="@Html.DisplayFor(modelItem => item.Fotolink)" alt="Card image cap">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"> @Html.DisplayFor(modelItem => item.AuteurVoornaam) @Html.DisplayFor(modelItem => item.AuteurAchternaam)</li>
+            <li class="list-group-item"> @Html.DisplayFor(modelItem => item.UitgeverNaam)</li>
+            <li class="list-group-item"> @Html.DisplayFor(modelItem => item.Taal)</li>
+            <li class="list-group-item"> @Html.DisplayFor(modelItem => item.Afmeting)</li>
+            <li class="list-group-item">@Html.DisplayFor(modelItem => item.Gewicht)</li>
+            <li class="list-group-item"> @Html.DisplayFor(modelItem => item.Druk)</li>
+            <li class="list-group-item"> @Html.DisplayFor(modelItem => item.ISBN)</li>
+        </ul>
+    </div>
+}</div>

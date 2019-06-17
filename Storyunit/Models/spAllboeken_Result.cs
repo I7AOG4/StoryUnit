@@ -22,5 +22,6 @@ namespace Storyunit.Models
         public string Gewicht { get; set; }
         public string Druk { get; set; }
         public string ISBN { get; set; }
+        public string Fotolink { get; set; }
     }
 }

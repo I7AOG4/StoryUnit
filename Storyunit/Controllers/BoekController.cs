@@ -7,14 +7,14 @@ using System.Web.Mvc;
 
 namespace Storyunit.Controllers
 {
-    public class AuteurController : Controller
+    public class BoekController : Controller
     {
-        private dbStoryunitEntities db = new dbStoryunitEntities();
+		private dbStoryunitEntities db = new dbStoryunitEntities();
 
-        // GET: Auteur
-        public ActionResult Index(string auteur)
+		// GET: Boek
+		public ActionResult Index()
         {
-            var data = db.spAllboekenAuteur(auteur);
+			var data = db.spAllboeken();
             return View(data.ToList());
         }
     }

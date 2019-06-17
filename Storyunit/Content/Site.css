@@ -22,3 +22,16 @@ select,
 textarea {
     max-width: 280px;
 }
+.fullImg {
+	background-image: url("HomepageBG.png");
+	height: 100vh;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.container {
+	width:80%!important
+}
+* {
+	font-family: 'Nunito Sans', sans-serif;
+}

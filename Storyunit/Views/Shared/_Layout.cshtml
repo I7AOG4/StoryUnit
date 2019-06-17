@@ -1,40 +1,118 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StoryUnit</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>StoryUnit</title>
+	<link href="https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap" rel="stylesheet">
+	@Styles.Render("~/Content/css")
+	@Scripts.Render("~/bundles/modernizr")
+	<script>
+        $(function () {
+            $(window).scroll(function () {
+                var $nav = $(".navbarStoryUnit");
+				var $img = $(".navImg");
+				if ($(this).scrollTop() > 0) {
+					$img.addClass('Scrolled');
+					$nav.addClass('Scrolled');
+				}
+            });
+        });
+	</script>
 </head>
 <body>
-	<nav class="navbarStoryUnit navbar-expand-lg clearfix">
+	<nav class="bg-white navbarStoryUnit navbar-expand-lg clearfix d-none d-lg-block">
 		<div class="navHolder">
-			<a class="float-left" href="~/Views/Home/Index.cshtml">
-				<img src="~/Content/StoryUnitLogoText.png" class="navImg"/>
+			<a class="float-left" href="Home/Index.cshtml">
+				<img src="~/Content/StoryUnitLogoText.png" class="navImg" />
 			</a>
 			<div class="float-right collapse navbar-collapse" style="height:100%!important;">
 				<div class="navbar-nav mr-auto" style="height:100%;">
 					<a class="navItem" href="#">Home</a>
-					<a class="navItem" href="#">Pagina 2</a>
-					<a class="navItem" href="#">Pagina 3</a>
+					<a class="navItem" href="#">Boeken</a>
+					<a class="navItem" href="#">Tijdschriften</a>
 				</div>
 			</div>
 		</div>
 	</nav>
-    <div class="container body-content">
-		<div style="margin-top: 80px;">
+	<!--Mobile Navbar-->
+	<nav class="bg-white navbar navbar-light navbar-1 white d-none d-block d-lg-none bg-white" style="position:fixed; right:0;">
+		<div class="text-center">
+			<a class="d-flex justify-content-center " ="Home/Index.cshtml">
+				<img src="~/Content/StoryUnitLogo.png" class="navImg" />
+			</a>
+		</div>
+		<div>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbardropdown"
+					aria-controls="navbarSupportedContent15" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		</div>
+		<div class="collapse navbar-collapse" id="navbardropdown">
+			<div class="navbar-nav mr-auto" style="height:100%;">
+				<a class="navItem" href="#">Home</a>
+				<a class="navItem" href="#">Boeken</a>
+				<a class="navItem" href="#">Tijdschriften</a>
+			</div>
+		</div>
+	</nav>
+	<!--<nav class="navbarStoryUnit navbar-expand-lg clearfix d-none d-lg-block">
+		<div class="navHolder">
+			<a class="float-left" href="~/Views/Home/Index.cshtml">
+				<img src="~/Content/StoryUnitLogoText.png" class="navImg" />
+			</a>
+			<div class="float-right collapse navbar-collapse" style="height:100%!important;">
+				<div class="navbar-nav mr-auto" style="height:100%;">
+					<a class="navItem" href="#">Home</a>
+					<a class="navItem" href="#">Boeken</a>
+					<a class="navItem" href="#">Tijdschriften</a>
+				</div>
+			</div>
+		</div>
+	</nav>-->
+	@if (ViewBag.Title == "Homepage")
+	{
+		<div class="fullImg"></div>
+	}
+	<div class="container">
+		<div style="padding-top:120px;">
 			@RenderBody()
 			<hr />
 			<footer>
-				<p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+				<div class="row">
+					<div class="col-md-4">
+						<h2>Contact</h2>
+						<p>
+							Bij vragen of opmerkingen kunt u terecht bij, de Jong
+							Als u mij wilt emailen:(v.d. L. Gojani, lgojani@rocvantwente.nl).<br />
+							Of bellen :0627981954
+						</p>
+					</div>
+					<div class="col-md-4">
+						<h2>Overzicht</h2>
+						<p>Een lijst van alle sites</p>
+						<ul>
+							<li><a href="~/Views/Home">Home</a></li>
+							<li><a href="~/Views/Boeken">Boeken</a></li>
+							<li><a href="~/Views/Tijdschriften">Tijdschriften</a></li>
+						</ul>
+					</div>
+					<div class="col-md-4">
+						<h2>Link</h2>
+						<p>Een Paar handige sites waar u ook kunt raadplegen voor meer informatie</p>
+						<ul>
+							<li><a href="http://www.boek.nl/boekweb/" target="_blank">Boekweb</a></li>
+							<li><a href="http://www.boek.nl/" target="_blank">Boeken</a></li>
+						</ul>
+					</div>
+				</div>
+				<p>&copy; @DateTime.Now.Year - Groep 4</p>
 			</footer>
 		</div>
-    </div>
+	</div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+	@Scripts.Render("~/bundles/jquery")
+	@Scripts.Render("~/bundles/bootstrap")
+	@RenderSection("scripts", required: false)
 </body>
 </html>
