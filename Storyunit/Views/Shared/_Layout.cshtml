@@ -7,21 +7,24 @@
 	<link href="https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap" rel="stylesheet">
 	@Styles.Render("~/Content/css")
 	@Scripts.Render("~/bundles/modernizr")
+	@Scripts.Render("~/bundles/jquery")
 	<script>
-        $(function () {
-            $(window).scroll(function () {
-                var $nav = $(".navbarStoryUnit");
-				var $img = $(".navImg");
-				if ($(this).scrollTop() > 0) {
-					$img.addClass('Scrolled');
-					$nav.addClass('Scrolled');
+		$(document).ready(function () {
+			$(window).scroll(function () {
+				var scroll = $(window).scrollTop();
+				if (scroll > 10) {
+					$(".navbarStoryUnit").addClass("Scrolled");
+					$(".navImg").addClass("Scrolled");
+				} else {
+					$(".navbarStoryUnit").removeClass("Scrolled"); 
+					$(".navImg").removeClass("Scrolled");
 				}
-            });
-        });
+			});
+		});
 	</script>
 </head>
 <body>
-	<nav class="bg-white navbarStoryUnit navbar-expand-lg clearfix d-none d-lg-block">
+	<nav class="navbarStoryUnit bg-white navbar-expand-lg clearfix ">
 		<div class="navHolder">
 			<a class="float-left" href="Home/Index.cshtml">
 				<img src="~/Content/StoryUnitLogoText.png" class="navImg" />
@@ -111,7 +114,6 @@
 		</div>
 	</div>
 
-	@Scripts.Render("~/bundles/jquery")
 	@Scripts.Render("~/bundles/bootstrap")
 	@RenderSection("scripts", required: false)
 </body>
