@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Storyunit.Models.spAllboeken_Result>
+﻿@model IEnumerable<Storyunit.Models.Boek>
 
     @{
     ViewBag.Title = "Boek";
@@ -11,8 +11,8 @@
         </div>
         <img class="card-img-top" src="@Html.DisplayFor(modelItem => item.Fotolink)" alt="Card image cap">
         <ul class="list-group list-group-flush">
-            <li class="list-group-item"> @Html.DisplayFor(modelItem => item.AuteurVoornaam) @Html.DisplayFor(modelItem => item.AuteurAchternaam)</li>
-            <li class="list-group-item"> @Html.DisplayFor(modelItem => item.UitgeverNaam)</li>
+            <li class="list-group-item"> @Html.DisplayFor(modelItem => item.Auteur.AuteurVoornaam) @Html.DisplayFor(modelItem => item.Auteur.AuteurAchternaam)</li>
+            <li class="list-group-item"> @Html.DisplayFor(modelItem => item.Uitgever.UitgeverNaam)</li>
             <li class="list-group-item"> @Html.DisplayFor(modelItem => item.Taal)</li>
             <li class="list-group-item"> @Html.DisplayFor(modelItem => item.Afmeting)</li>
             <li class="list-group-item">@Html.DisplayFor(modelItem => item.Gewicht)</li>

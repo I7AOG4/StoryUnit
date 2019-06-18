@@ -1,5 +1,7 @@
 ﻿using Storyunit.Models;
 using System;
+using System.Data;
+using System.Data.Entity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,8 +16,8 @@ namespace Storyunit.Controllers
 		// GET: Boek
 		public ActionResult Index()
         {
-			var data = db.spAllboeken();
-            return View(data.ToList());
-        }
+			var boek = db.Boek.Include(b => b.Auteur).Include(b => b.Taal).Include(b => b.Uitgever);
+			return View(boek.ToList());
+		}
     }
 }
