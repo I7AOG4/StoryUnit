@@ -26,8 +26,8 @@ namespace Storyunit
 			// In Startup iam creating first Admin Role and creating a default Admin User    
 			if (!roleManager.RoleExists("Admin"))
 			{
-
-				// first we create Admin rool   
+				// first we create Admin rool
+				
 				var role = new IdentityRole();
 				role.Name = "Admin";
 				roleManager.Create(role);
@@ -42,11 +42,11 @@ namespace Storyunit
 
 				var chkUser = UserManager.Create(user, userPWD);
 
-				//Add default User to Role Admin   
+				//Add default User to Role Admin
+				
 				if (chkUser.Succeeded)
 				{
 					var result1 = UserManager.AddToRole(user.Id, "Admin");
-
 				}
 			}
 		}

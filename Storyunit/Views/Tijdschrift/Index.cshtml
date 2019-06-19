@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Storyunit.Models.Tijdschrift>
+
+@{
+	ViewBag.Title = "Tijdschrift";
+}
+<div class="card-columns d-flex flex-wrap">
+	@foreach (var item in Model)
+	{
+		<div class="card" style="width: 18rem; margin: 10px">
+			<div class="card-body">
+				<h5 class="card-title">@Html.DisplayFor(modelItem => item.Titel)</h5>
+			</div>
+			<img class="card-img-top" src="@Html.DisplayFor(modelItem => item.Fotolink)" alt="Card image cap">
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item"> @Html.DisplayFor(modelItem => item.Auteur.AuteurVoornaam) @Html.DisplayFor(modelItem => item.Auteur.AuteurAchternaam)</li>
+				<li class="list-group-item"> @Html.DisplayFor(modelItem => item.Uitgever.UitgeverNaam)</li>
+				<li class="list-group-item"> @Html.DisplayFor(modelItem => item.Taal.Taal1)</li>
+				<li class="list-group-item"> @Html.DisplayFor(modelItem => item.Afmeting)</li>
+				<li class="list-group-item"> @Html.DisplayFor(modelItem => item.Uitgifte)</li>
+				<li class="list-group-item"> @Html.DisplayFor(modelItem => item.ISSN)</li>
+			</ul>
+		</div>
+	}
+</div>
