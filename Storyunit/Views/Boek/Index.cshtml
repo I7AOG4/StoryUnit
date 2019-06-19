@@ -4,20 +4,52 @@
     ViewBag.Title = "Boek";
     }
 <div class="card-columns d-flex flex-wrap">
-    @foreach (var item in Model) {
     <div class="card" style="width: 18rem; margin: 10px">
         <div class="card-body">
-            <h5 class="card-title">@Html.DisplayFor(modelItem => item.Titel)</h5>
+            <h5 class="card-title">Filter</h5>
         </div>
-        <img class="card-img-top" src="@Html.DisplayFor(modelItem => item.Fotolink)" alt="Card image cap">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item"> @Html.DisplayFor(modelItem => item.Auteur.AuteurVoornaam) @Html.DisplayFor(modelItem => item.Auteur.AuteurAchternaam)</li>
-            <li class="list-group-item"> @Html.DisplayFor(modelItem => item.Uitgever.UitgeverNaam)</li>
-            <li class="list-group-item"> @Html.DisplayFor(modelItem => item.Taal)</li>
-            <li class="list-group-item"> @Html.DisplayFor(modelItem => item.Afmeting)</li>
-            <li class="list-group-item">@Html.DisplayFor(modelItem => item.Gewicht)</li>
-            <li class="list-group-item"> @Html.DisplayFor(modelItem => item.Druk)</li>
-            <li class="list-group-item"> @Html.DisplayFor(modelItem => item.ISBN)</li>
-        </ul>
+
+        <div class="p-4">
+            <b>Zoek boeken op auteur</b>
+            <p>Zoeken</p>
+
+            <div>
+                @using (Html.BeginForm("SearchAuthor", "Boek", FormMethod.Post))
+                {
+                    @Html.TextBox("value")<input type="submit" value="Search" />
+                }
+            </div>
+
+            <b><br />Zoek boeken op taal</b>
+            <p>Zoeken</p>
+
+            <div>
+                @using (Html.BeginForm("SearchTaal", "Boek", FormMethod.Post))
+                {
+                    @Html.TextBox("value")<input type="submit" value="Search" />
+                }
+            </div>
+        </div>
     </div>
-}</div>
+
+    @foreach (var item in Model)
+    {
+        <div class="card" style="width: 18rem; margin: 10px">
+            <div class="card-body">
+                <h5 class="card-title">@Html.DisplayFor(modelItem => item.Titel)</h5>
+            </div>
+
+            <img class="card-img-top" src="@Html.DisplayFor(modelItem => item.Fotolink)" alt="Card image cap">
+
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"> @Html.DisplayFor(modelItem => item.Auteur.AuteurVoornaam) @Html.DisplayFor(modelItem => item.Auteur.AuteurAchternaam)</li>
+                <li class="list-group-item"> @Html.DisplayFor(modelItem => item.Uitgever.UitgeverNaam)</li>
+                <li class="list-group-item"> @Html.DisplayFor(modelItem => item.Taal.Taal1)</li>
+                <li class="list-group-item"> @Html.DisplayFor(modelItem => item.Afmeting)</li>
+                <li class="list-group-item"> @Html.DisplayFor(modelItem => item.Gewicht)</li>
+                <li class="list-group-item"> @Html.DisplayFor(modelItem => item.Druk)</li>
+                <li class="list-group-item"> @Html.DisplayFor(modelItem => item.ISBN)</li>
+            </ul>
+        </div>
+    }
+</div>
