@@ -35,3 +35,7 @@ textarea {
 * {
 	font-family: 'Nunito Sans', sans-serif;
 }
+hr {
+	border: 2px solid rgb(24,131,238);
+	border-radius: 5px;
+}
