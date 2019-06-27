@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="dbStoryunitModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="dbStoryunitModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Auteur">
           <Key>
             <PropertyRef Name="AuteurID" />
@@ -222,6 +222,8 @@
           <NavigationProperty Name="Auteur" Relationship="Self.FK_Boek_Auteur" FromRole="Boek" ToRole="Auteur" />
           <NavigationProperty Name="Taal" Relationship="Self.FK_Boek_Taal" FromRole="Boek" ToRole="Taal" />
           <NavigationProperty Name="Uitgever" Relationship="Self.FK_Boek_Uitgever" FromRole="Boek" ToRole="Uitgever" />
+          <NavigationProperty Name="Boek1" Relationship="dbStoryunitModel.FK_Boek_Boek" FromRole="Boek" ToRole="Boek1" />
+          <NavigationProperty Name="Boek2" Relationship="dbStoryunitModel.FK_Boek_Boek" FromRole="Boek1" ToRole="Boek" />
           </EntityType>
         <EntityType Name="Taal">
           <Key>
@@ -248,6 +250,8 @@
           <NavigationProperty Name="Auteur" Relationship="Self.FK_Tijdschrift_Auteur" FromRole="Tijdschrift" ToRole="Auteur" />
           <NavigationProperty Name="Taal" Relationship="Self.FK_Tijdschrift_Taal" FromRole="Tijdschrift" ToRole="Taal" />
           <NavigationProperty Name="Uitgever" Relationship="Self.FK_Tijdschrift_Uitgever" FromRole="Tijdschrift" ToRole="Uitgever" />
+          <NavigationProperty Name="Tijdschrift1" Relationship="dbStoryunitModel.FK_Tijdschrift_Tijdschrift" FromRole="Tijdschrift" ToRole="Tijdschrift1" />
+          <NavigationProperty Name="Tijdschrift2" Relationship="dbStoryunitModel.FK_Tijdschrift_Tijdschrift" FromRole="Tijdschrift1" ToRole="Tijdschrift" />
           </EntityType>
         <EntityType Name="Uitgever">
           <Key>
@@ -374,6 +378,14 @@
           <FunctionImport Name="spAllTijdschriftenTaal" ReturnType="Collection(dbStoryunitModel.spAllTijdschriftenTaal_Result)">
           <Parameter Name="Taal" Mode="In" Type="String" />
           </FunctionImport>
+          <AssociationSet Name="FK_Boek_Boek" Association="dbStoryunitModel.FK_Boek_Boek">
+            <End Role="Boek" EntitySet="Boek" />
+            <End Role="Boek1" EntitySet="Boek" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tijdschrift_Tijdschrift" Association="dbStoryunitModel.FK_Tijdschrift_Tijdschrift">
+            <End Role="Tijdschrift" EntitySet="Tijdschrift" />
+            <End Role="Tijdschrift1" EntitySet="Tijdschrift" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="spAllboeken_Result">
           <Property Type="String" Name="AuteurVoornaam" Nullable="true" />
@@ -439,6 +451,30 @@
           <Property Type="String" Name="Afmeting" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="ISSN" Nullable="true" MaxLength="50" />
         </ComplexType>
+        <Association Name="FK_Boek_Boek">
+          <End Type="dbStoryunitModel.Boek" Role="Boek" Multiplicity="1" />
+          <End Type="dbStoryunitModel.Boek" Role="Boek1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Boek">
+              <PropertyRef Name="BoekID" />
+            </Principal>
+            <Dependent Role="Boek1">
+              <PropertyRef Name="BoekID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tijdschrift_Tijdschrift">
+          <End Type="dbStoryunitModel.Tijdschrift" Role="Tijdschrift" Multiplicity="1" />
+          <End Type="dbStoryunitModel.Tijdschrift" Role="Tijdschrift1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Tijdschrift">
+              <PropertyRef Name="TijdschriftID" />
+            </Principal>
+            <Dependent Role="Tijdschrift1">
+              <PropertyRef Name="TijdschriftID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

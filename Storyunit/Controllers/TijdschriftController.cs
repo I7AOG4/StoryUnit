@@ -11,14 +11,27 @@ using Storyunit.Models;
 namespace Storyunit.Controllers
 {
     public class TijdschriftController : Controller
-	{
-		private dbStoryunitEntities db = new dbStoryunitEntities();
+    {
+        private dbStoryunitEntities db = new dbStoryunitEntities();
 
-		// GET: Tijdschrift
-		public ActionResult Index()
+        // GET: Tijdschrift
+        public ActionResult Index(String value)
         {
-			var tijdschrift = db.Tijdschrift.Include(t => t.Auteur).Include(t => t.Taal).Include(t => t.Uitgever);
-			return View(tijdschrift.ToList());
-		}
+            if (value != null)
+            {
+
+                var tijdschriften = db.Tijdschrift.Include(b => b.Auteur).Include(b => b.Taal).Include(b => b.Uitgever).Where(a => a.Taal.Taal1 == value);
+                return View(tijdschriften.ToList());
+            }
+            else
+            {
+                var tijdschrift = db.Tijdschrift.Include(b => b.Auteur).Include(b => b.Taal).Include(b => b.Uitgever).Where(a => a.Taal.Taal1 == value);
+                return View(tijdschrift.ToList());
+                /*
+                var boek = db.Boek.Include(b => b.Auteur).Include(b => b.Taal).Include(b => b.Uitgever);
+                return View(boek.ToList());
+                */
+            }
+        }
     }
 }

@@ -28,5 +28,7 @@ namespace Storyunit.Models
         public virtual Auteur Auteur { get; set; }
         public virtual Taal Taal { get; set; }
         public virtual Uitgever Uitgever { get; set; }
+        public virtual Boek Boek1 { get; set; }
+        public virtual Boek Boek2 { get; set; }
     }
 }

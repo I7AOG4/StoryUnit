@@ -11,13 +11,23 @@ namespace Storyunit.Controllers
 {
     public class BoekController : Controller
     {
-		private dbStoryunitEntities db = new dbStoryunitEntities();
+        private dbStoryunitEntities db = new dbStoryunitEntities();
 
-		// GET: Boek
-		public ActionResult Index()
+        // GET: Boek
+        public ActionResult Index(String value)
         {
-			var boek = db.Boek.Include(b => b.Auteur).Include(b => b.Taal).Include(b => b.Uitgever);
-			return View(boek.ToList());
-		}
+            if (value != null)
+            {
+
+                var Taal = db.Boek.Include(b => b.Auteur).Include(b => b.Taal).Include(b => b.Uitgever).Where(a => a.Taal.Taal1 == value);
+                return View(Taal.ToList());
+            }
+            else
+            {
+
+                var boek = db.Boek.Include(b => b.Auteur).Include(b => b.Taal).Include(b => b.Uitgever);
+                return View(boek.ToList());
+            }
+        }
     }
 }

@@ -16,6 +16,8 @@
         <AssociationConnector Association="dbStoryunitModel.FK_Boek_Uitgever" ManuallyRouted="false" />
         <AssociationConnector Association="dbStoryunitModel.FK_Tijdschrift_Taal" ManuallyRouted="false" />
         <AssociationConnector Association="dbStoryunitModel.FK_Tijdschrift_Uitgever" ManuallyRouted="false" />
+        <AssociationConnector Association="dbStoryunitModel.FK_Boek_Boek" />
+        <AssociationConnector Association="dbStoryunitModel.FK_Tijdschrift_Tijdschrift" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
